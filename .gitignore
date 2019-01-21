@@ -85,3 +85,6 @@ sw.*
 
 # direnv
 .envrc
+
+# OneSignal
+static/OneSignal*

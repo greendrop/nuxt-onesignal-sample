@@ -1,7 +1,6 @@
-const pkg = require('./package')
-
-
 const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+const pkg = require('./package')
+require('dotenv').config()
 
 module.exports = {
   mode: 'spa',
@@ -10,7 +9,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'Nuxt.js OneSignal Push通知サンプル',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -34,16 +33,12 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [
-    '~/assets/style/app.styl'
-  ],
+  css: ['~/assets/style/app.styl'],
 
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-    '@/plugins/vuetify'
-  ],
+  plugins: ['@/plugins/vuetify'],
 
   /*
   ** Nuxt.js modules
@@ -51,6 +46,8 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/dotenv',
+    '@nuxtjs/onesignal', // @nuxtjs/pwaより前に記載
     '@nuxtjs/pwa'
   ],
   /*
@@ -58,6 +55,29 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+
+  oneSignal: {
+    init: {
+      appId: process.env.ONESIGNAL_APP_ID,
+      allowLocalhostAsSecureOrigin: true,
+      welcomeNotification: {
+        disable: true
+      }
+    },
+    cdn: true
+  },
+
+  manifest: {
+    name: 'Nuxt.js OneSignal Push通知サンプル',
+    short_name: 'Nuxt.js OneSignal Push通知サンプル',
+    author: 'greendrop',
+    description: 'Nuxt.js OneSignal Push通知サンプル',
+    lang: 'ja'
+  },
+
+  workbox: {
+    dev: true
   },
 
   /*
@@ -68,10 +88,10 @@ module.exports = {
     plugins: [new VuetifyLoaderPlugin()],
     loaders: {
       stylus: {
-        import: ["~assets/style/variables.styl"]
+        import: ['~assets/style/variables.styl']
       }
     },
-    
+
     /*
     ** You can extend webpack config here
     */
