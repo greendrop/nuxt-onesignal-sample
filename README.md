@@ -1,22 +1,53 @@
 # nuxt-onesignal-sample
 
-> My impressive Nuxt.js project
+# aed-map
 
-## Build Setup
+OneSignalとNuxt.jsを使用したPush通知サンプルです。
 
-``` bash
-# install dependencies
+## 使用言語・ライブラリ
+
+- OneSignal
+- Nuxt.js(Vue.js)
+- Vuetify
+
+## 環境構築アプリケーション
+
+- Docker
+- Docker Compose
+- direnv
+- git
+
+## セットアップ
+
+```shell
+$ git clone git@github.com:greendrop/nuxt-onesignal-sample.git
+$ cd nuxt-onesignal-sample
+$ vi .envrc
+$ direnv allow
+$ cp .env.example .env
+$ docker-compose pull
+$ docker-compose build
+$ docker-compose run --rm front bash
 $ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn run dev
-
-# build for production and launch server
-$ yarn run build
-$ yarn start
-
-# generate static project
-$ yarn run generate
+$ exit
+$ docker-compose up
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+### .envrc
+
+```
+export USER_ID=`id -u`
+export GROUP_ID=`id -g`
+```
+
+### .env
+
+OneSignalのApp ID
+
+```
+ONESIGNAL_APP_ID=XXXXXX
+```
+
+## ブラウザで表示
+
+http://localhost:3000
